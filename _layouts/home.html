@@ -1,0 +1,13 @@
+---
+layout: default
+---
+<div class="home-hero">
+  <div class="hero-prompt fade-1">$ whoami --title</div>
+  <h1 class="hero-name fade-2">{{ page.hero_name | default: site.short_title }}<span class="caret" aria-hidden="true">_</span></h1>
+  <div class="hero-role fade-3">{{ page.tagline }}</div>
+  <p class="hero-intro fade-3">{{ page.intro }}</p>
+  {% if page.cta_text %}
+  <a href="{{ page.cta_url | relative_url }}" class="hero-cta fade-3">{{ page.cta_text }} &rarr;</a>
+  {% endif %}
+</div>
+{{ content }}

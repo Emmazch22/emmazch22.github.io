@@ -1,0 +1,56 @@
+title: emmazch
+short_title: emmazch22
+description: >-
+  Cybersecurity analyst focused on detection engineering and threat hunting
+  across endpoint, network, and cloud telemetry. Tools, writeups, and CVE
+  analysis.
+author: emmazch
+url: "https://emmazch22.github.io"
+baseurl: ""
+
+github_username: Emmazch22
+linkedin_username: emmazch
+
+terminal_user: emmazch
+terminal_host: soc
+terminal_shell: bash
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+permalink: /writeups/:year/:month/:day/:title/
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules

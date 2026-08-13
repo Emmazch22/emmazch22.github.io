@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<article class="post">
+  <div class="post-prompt">$ cat {{ page.date | date: "%Y-%m-%d" }}-{{ page.slug }}.md</div>
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-meta">
+    <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
+    {% if page.cve %}<span class="post-cve">{{ page.cve }}</span>{% endif %}
+    {% if page.severity %}<span class="severity severity-{{ page.severity | downcase }}">{{ page.severity }}</span>{% endif %}
+    {% if page.tags %}
+    <span class="post-tags">
+      {% for tag in page.tags %}<span class="tag">#{{ tag }}</span>{% endfor %}
+    </span>
+    {% endif %}
+  </div>
+  <div class="post-body">
+    {{ content }}
+  </div>
+  <a href="{{ '/writeups/' | relative_url }}" class="back-link">&larr; back to writeups</a>
+</article>

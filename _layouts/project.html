@@ -1,0 +1,21 @@
+---
+layout: default
+---
+<article class="project">
+  <div class="post-prompt">$ ./{{ page.slug }} --info</div>
+  <h1 class="project-title">{{ page.title }}</h1>
+  {% if page.tagline %}<p class="project-tagline">{{ page.tagline }}</p>{% endif %}
+  {% if page.stack %}
+  <div class="stack-list">
+    {% for item in page.stack %}<span class="tag">{{ item }}</span>{% endfor %}
+  </div>
+  {% endif %}
+  <div class="project-links">
+    {% if page.repo_url %}<a href="{{ page.repo_url }}" target="_blank" rel="noopener" class="project-link">repo &rarr;</a>{% endif %}
+    {% if page.demo_url %}<a href="{{ page.demo_url }}" target="_blank" rel="noopener" class="project-link">demo &rarr;</a>{% endif %}
+  </div>
+  <div class="post-body">
+    {{ content }}
+  </div>
+  <a href="{{ '/projects/' | relative_url }}" class="back-link">&larr; back to projects</a>
+</article>
