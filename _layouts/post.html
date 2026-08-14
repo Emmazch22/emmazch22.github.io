@@ -3,7 +3,15 @@ layout: default
 ---
 <article class="post">
   <div class="post-prompt">$ cat {{ page.date | date: "%Y-%m-%d" }}-{{ page.slug }}.md</div>
-  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-title-row">
+    <h1 class="post-title"{% if page.bilingual %} data-en="{{ page.title | escape }}" data-es="{{ page.title_es | default: page.title | escape }}"{% endif %}>{{ page.title }}</h1>
+    {% if page.bilingual %}
+    <div class="lang-toggle" role="group" aria-label="Language / Idioma">
+      <button type="button" class="lang-btn is-active" data-lang-btn="en">EN</button>
+      <button type="button" class="lang-btn" data-lang-btn="es">ES</button>
+    </div>
+    {% endif %}
+  </div>
   <div class="post-meta">
     <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time>
     {% if page.cve %}<span class="post-cve">{{ page.cve }}</span>{% endif %}
@@ -19,3 +27,6 @@ layout: default
   </div>
   <a href="{{ '/writeups/' | relative_url }}" class="back-link">&larr; back to writeups</a>
 </article>
+{% if page.bilingual %}
+<script src="{{ '/assets/js/lang-toggle.js' | relative_url }}" defer></script>
+{% endif %}
