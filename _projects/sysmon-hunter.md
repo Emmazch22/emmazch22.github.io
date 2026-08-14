@@ -1,8 +1,14 @@
 ---
 title: sysmon-hunter
-tagline: Query and triage Sysmon event logs for suspicious process, network, and registry activity from the command line.
+tagline: A command-line triage tool for Sysmon telemetry — index process lineage and command-line activity, then run Sigma-style detection rules against exported logs, no Event Viewer required.
 stack: [Python, Sysmon, Windows Event Log, Sigma]
 repo_url: https://github.com/Emmazch22/sysmon-hunter
+category: Detection Engineering
+status: active
+achievements:
+  - Parses Sysmon Event IDs 1, 3, 7, 8, 10, 11/23 — process creation, network connections, image loads, and file activity
+  - Applies Sigma-style detection rule logic directly against parsed events
+  - Outputs a process-tree view for fast parent/child triage
 order: 1
 ---
 
