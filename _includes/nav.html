@@ -1,5 +1,5 @@
 {%- assign navpath = page.url | remove: site.baseurl -%}
-<nav class="chrome-nav">
+<nav class="chrome-nav" role="navigation" aria-label="Main navigation">
   <a href="{{ '/' | relative_url }}"{% if navpath == '/' or navpath == '/index.html' %} aria-current="page" class="is-active"{% endif %}>home</a>
   <a href="{{ '/projects/' | relative_url }}"{% if navpath contains '/projects/' %} aria-current="page" class="is-active"{% endif %}>projects</a>
   <a href="{{ '/writeups/' | relative_url }}"{% if navpath contains '/writeups/' %} aria-current="page" class="is-active"{% endif %}>writeups</a>

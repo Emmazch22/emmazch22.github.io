@@ -12,8 +12,9 @@
 {% feed_meta %}
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   {% include header.html %}
-  <main class="site-main{% if page.layout == 'home' %} home-main{% endif %}">
+  <main id="main-content" tabindex="-1" class="site-main{% if page.layout == 'home' %} home-main{% endif %}">
     {{ content }}
   </main>
   {% include footer.html %}

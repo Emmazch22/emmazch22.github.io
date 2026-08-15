@@ -92,6 +92,29 @@ img { max-width: 100%; display: block; }
 }
 
 /* ==========================================================================
+   accessibility: skip link
+   ========================================================================== */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 12px;
+  z-index: 100;
+  background: var(--bg-raised);
+  color: var(--fg-bright);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ==========================================================================
    terminal chrome header
    ========================================================================== */
 
@@ -123,6 +146,39 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* Progressive simplification: show the full "user@host — shell — WxH"
+   string when there's room, drop to "user@host — shell", then just
+   "user@host" as the viewport narrows, rather than letting it truncate
+   mid-word or wrap into the nav row. */
+.chrome-title-mid,
+.chrome-title-short {
+  display: none;
+}
+
+@media (max-width: 479px) {
+  .chrome-bar {
+    padding: 8px 12px;
+    font-size: 10.5px;
+    gap: 6px;
+  }
+  .chrome-title-full,
+  .chrome-title-mid {
+    display: none;
+  }
+  .chrome-title-short {
+    display: inline;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 640px) {
+  .chrome-title-full {
+    display: none;
+  }
+  .chrome-title-mid {
+    display: inline;
+  }
 }
 
 .chrome-nav {
@@ -160,8 +216,8 @@ img { max-width: 100%; display: block; }
    ========================================================================== */
 
 .home-main {
-  justify-content: center;
-  padding: 48px 24px;
+  justify-content: flex-start;
+  padding: 40px 24px;
 }
 
 .home-hero {
@@ -210,7 +266,7 @@ img { max-width: 100%; display: block; }
 
 @media (min-width: 641px) {
   .home-main {
-    padding: 96px 56px;
+    padding: 72px 56px 96px;
   }
   .home-hero {
     align-items: flex-end;
@@ -219,6 +275,117 @@ img { max-width: 100%; display: block; }
   }
   .hero-name {
     font-size: 62px;
+  }
+}
+
+/* ==========================================================================
+   homepage: featured projects
+   ========================================================================== */
+
+.featured-projects {
+  width: 100%;
+  margin-top: 56px;
+}
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 20px;
+}
+.section-prompt {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--fg-subtle);
+}
+.section-heading {
+  font: 700 20px/1.2 var(--font-mono);
+  color: var(--fg-bright);
+  margin: 0;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-raised);
+}
+
+.project-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.project-card-icon {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.project-card-title {
+  font: 600 15px/1.3 var(--font-mono);
+  color: var(--fg-bright);
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.project-card-head .explorer-item-status {
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.project-card-desc {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--fg-body);
+  margin: 0;
+}
+
+.project-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.project-card-links {
+  display: flex;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.section-more {
+  display: inline-block;
+  font-size: 12.5px;
+  text-decoration: none;
+  color: var(--fg-dim);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+}
+.section-more:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (min-width: 641px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .project-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

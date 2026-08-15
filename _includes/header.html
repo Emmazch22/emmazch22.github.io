@@ -1,7 +1,11 @@
 <header class="chrome-bar">
-  <span class="chrome-dot"></span>
-  <span class="chrome-dot"></span>
-  <span class="chrome-dot"></span>
-  <span class="chrome-title">{{ site.terminal_user }}@{{ site.terminal_host }} &mdash; {{ site.terminal_shell }} &mdash; 120&times;34</span>
+  <span class="chrome-dot" aria-hidden="true"></span>
+  <span class="chrome-dot" aria-hidden="true"></span>
+  <span class="chrome-dot" aria-hidden="true"></span>
+  <span class="chrome-title">
+    <span class="chrome-title-full">{{ site.terminal_user }}@{{ site.terminal_host }} &mdash; {{ site.terminal_shell }} &mdash; 120&times;34</span>
+    <span class="chrome-title-mid">{{ site.terminal_user }}@{{ site.terminal_host }} &mdash; {{ site.terminal_shell }}</span>
+    <span class="chrome-title-short">{{ site.terminal_user }}@{{ site.terminal_host }}</span>
+  </span>
   {% include nav.html %}
 </header>
