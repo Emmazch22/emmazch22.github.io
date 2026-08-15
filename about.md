@@ -49,4 +49,9 @@ permalink: /about/
   <p>
     <a href="mailto:emmanuel2202zch@gmail.com">emmanuel2202zch@gmail.com</a>
   </p>
+
+  <h2 class="section-title">$ ./resume.sh --download</h2>
+  <p>
+    <a href="{{ '/assets/files/emmanuel-zuniga-resume.pdf' | relative_url }}" download>emmanuel-zuniga-resume.pdf</a>
+  </p>
 </div>
