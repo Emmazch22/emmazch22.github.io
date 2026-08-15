@@ -26,8 +26,8 @@ permalink: /about/
   <h2 class="section-title">$ cat ./certifications.txt</h2>
   <ul class="plain-list">
     <li>eCTHP &mdash; eLearnSecurity Certified Threat Hunting Professional</li>
-    <li>PMRP</li>
-    <li>MCBTA</li>
+    <li>PMRP &mdash; Practical Malware Researcher Professional</li>
+    <li>MCBTA &mdash; Multi-Cloud Blue Team Analyst</li>
     <li>GCP ACE &mdash; Google Cloud Associate Cloud Engineer</li>
   </ul>
 
@@ -44,4 +44,9 @@ permalink: /about/
     <span class="tag">MITRE ATT&amp;CK</span>
     <span class="tag">Windows Internals</span>
   </div>
+
+  <h2 class="section-title">$ cat ./contact.txt</h2>
+  <p>
+    <a href="mailto:emmanuel2202zch@gmail.com">emmanuel2202zch@gmail.com</a>
+  </p>
 </div>
