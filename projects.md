@@ -6,7 +6,7 @@ permalink: /projects/
 <div class="page-head">
   <div class="page-prompt">$ ls ./projects</div>
   <h1 class="page-title">projects</h1>
-  <p class="page-lede">Detection engineering tooling I build and maintain — starting with sysmon-hunter, a CLI for Sigma-driven Sysmon triage.</p>
+  <p class="page-lede">Detection engineering tooling I build and maintain — starting with sysmon-hunter, a real-time Sysmon detection and correlation engine with a live analyst console.</p>
 </div>
 
 {% assign projects = site.projects | sort: 'order' %}
