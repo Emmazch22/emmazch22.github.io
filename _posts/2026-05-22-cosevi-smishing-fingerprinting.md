@@ -29,7 +29,7 @@ I received an SMS with a link (`cosevik.cc/cr`) impersonating COSEVI — a commo
 What made this case interesting wasn't the pretext — that part is standard — but what happened when I tried to analyze it.
 
 <figure class="post-figure">
-  <img src="{{ '/assets/images/writeups/cosevi-smishing/smishing-sms.jpg' | relative_url }}" alt="Screenshot of the SMS message impersonating COSEVI, linking to cosevik.cc/cr">
+  <img src="{{ '/assets/images/writeups/cosevi-smishing/smishing-sms.jpg' | relative_url }}" alt="Screenshot of the SMS message impersonating COSEVI, linking to cosevik.cc/cr" width="480" height="1043" loading="lazy" decoding="async">
   <figcaption>The original smishing SMS impersonating COSEVI, warning of a "pending judicial collection" and linking to <code>cosevik.cc/cr</code> — an urgency-driven pretext designed to trigger an impulsive click.</figcaption>
 </figure>
 
@@ -40,7 +40,7 @@ Visiting the domain showed a static landing page with generic "Meridian Cloud" b
 The domain itself (`.cc`, unrelated to any known entity in Costa Rica) was already a red flag, but the lack of "active" content didn't match the expected pattern for a live smishing campaign.
 
 <figure class="post-figure">
-  <img src="{{ '/assets/images/writeups/cosevi-smishing/decoy-landing.jpg' | relative_url }}" alt="Illustrative screenshot of the decoy SaaS landing page shown at cosevik.cc/cr in a normal desktop browser">
+  <img src="{{ '/assets/images/writeups/cosevi-smishing/decoy-landing.jpg' | relative_url }}" alt="Illustrative screenshot of the decoy SaaS landing page shown at cosevik.cc/cr in a normal desktop browser" width="480" height="633" loading="lazy" decoding="async">
   <figcaption>Illustrative capture of the decoy pattern: a generic SaaS landing page ("Meridian Cloud" at the time of this analysis) served to a normal desktop browser at <code>cosevik.cc/cr</code>, with no working links or forms — the benign content shown to anything that fails the kit's fingerprint check.</figcaption>
 </figure>
 
@@ -82,17 +82,17 @@ Once the "real" content was served, the flow convincingly replicated a governmen
 3. **Card capture** — a full form for cardholder name, card number, expiration date, and CVV, with additional support for capturing a bank OTP
 
 <figure class="post-figure">
-  <img src="{{ '/assets/images/writeups/cosevi-smishing/violation-lookup.jpg' | relative_url }}" alt="Screenshot of the violation lookup screen in the real phishing flow, with browser DevTools open">
+  <img src="{{ '/assets/images/writeups/cosevi-smishing/violation-lookup.jpg' | relative_url }}" alt="Screenshot of the violation lookup screen in the real phishing flow, with browser DevTools open" width="800" height="415" loading="lazy" decoding="async">
   <figcaption>Step 1 — the real phishing flow, only reachable by spoofing an iPhone 14 Pro Max in responsive mode. DevTools' Network panel (right) shows the kit loading its own JS/CSS bundle and hitting endpoints like <code>/geoinfo</code>, <code>/handshake</code>, and <code>/credentials</code>.</figcaption>
 </figure>
 
 <figure class="post-figure">
-  <img src="{{ '/assets/images/writeups/cosevi-smishing/violation-detail.jpg' | relative_url }}" alt="Screenshot of the fabricated traffic violation detail screen">
+  <img src="{{ '/assets/images/writeups/cosevi-smishing/violation-detail.jpg' | relative_url }}" alt="Screenshot of the fabricated traffic violation detail screen" width="800" height="418" loading="lazy" decoding="async">
   <figcaption>Step 2 — a fabricated traffic violation with plate number, legal article, and amount due, engineered to create payment pressure with a fake 40% early-payment "discount."</figcaption>
 </figure>
 
 <figure class="post-figure">
-  <img src="{{ '/assets/images/writeups/cosevi-smishing/card-capture.jpg' | relative_url }}" alt="Screenshot of the bank card capture form">
+  <img src="{{ '/assets/images/writeups/cosevi-smishing/card-capture.jpg' | relative_url }}" alt="Screenshot of the bank card capture form" width="800" height="419" loading="lazy" decoding="async">
   <figcaption>Step 3 — the credential-harvesting form capturing full card number, expiration, and CVV, styled to look like a legitimate Costa Rican payment page listing recognizable local banks.</figcaption>
 </figure>
 
@@ -183,7 +183,7 @@ Recibí un SMS con un link (`cosevik.cc/cr`) suplantando al COSEVI, un patrón c
 Lo que hizo este caso interesante no fue el pretexto — eso es estándar — sino lo que pasó al intentar analizarlo.
 
 <figure class="post-figure">
-  <img src="{{ '/assets/images/writeups/cosevi-smishing/smishing-sms.jpg' | relative_url }}" alt="Captura del mensaje SMS suplantando al COSEVI, enlazando a cosevik.cc/cr">
+  <img src="{{ '/assets/images/writeups/cosevi-smishing/smishing-sms.jpg' | relative_url }}" alt="Captura del mensaje SMS suplantando al COSEVI, enlazando a cosevik.cc/cr" width="480" height="1043" loading="lazy" decoding="async">
   <figcaption>El SMS de smishing original suplantando al COSEVI, advirtiendo sobre un "cobro judicial" pendiente y enlazando a <code>cosevik.cc/cr</code> — un pretexto basado en urgencia diseñado para provocar un clic impulsivo.</figcaption>
 </figure>
 
@@ -194,7 +194,7 @@ Al visitar el dominio, la página mostraba una landing estática con branding ge
 Ya el dominio en sí (`.cc`, sin relación con ninguna entidad conocida en Costa Rica) era una señal de alerta, pero la falta de contenido "activo" no encajaba con el patrón esperado de una campaña de smishing en curso.
 
 <figure class="post-figure">
-  <img src="{{ '/assets/images/writeups/cosevi-smishing/decoy-landing.jpg' | relative_url }}" alt="Captura ilustrativa de la landing señuelo tipo SaaS mostrada en cosevik.cc/cr en un navegador de escritorio normal">
+  <img src="{{ '/assets/images/writeups/cosevi-smishing/decoy-landing.jpg' | relative_url }}" alt="Captura ilustrativa de la landing señuelo tipo SaaS mostrada en cosevik.cc/cr en un navegador de escritorio normal" width="480" height="633" loading="lazy" decoding="async">
   <figcaption>Captura ilustrativa del patrón de señuelo: una landing genérica tipo SaaS ("Meridian Cloud" al momento de este análisis) servida a un navegador de escritorio normal en <code>cosevik.cc/cr</code>, sin enlaces ni formularios funcionales — el contenido inofensivo mostrado a cualquier visitante que no pasa el chequeo de fingerprint del kit.</figcaption>
 </figure>
 
@@ -236,17 +236,17 @@ Una vez servido el contenido "real", el flujo replicaba de forma convincente un 
 3. **Captura bancaria** — formulario completo para nombre del titular, número de tarjeta, fecha de vencimiento y CVV, con soporte adicional para captura de OTP bancario
 
 <figure class="post-figure">
-  <img src="{{ '/assets/images/writeups/cosevi-smishing/violation-lookup.jpg' | relative_url }}" alt="Captura de la pantalla de consulta de infracciones del flujo real de phishing, con DevTools del navegador abierto">
+  <img src="{{ '/assets/images/writeups/cosevi-smishing/violation-lookup.jpg' | relative_url }}" alt="Captura de la pantalla de consulta de infracciones del flujo real de phishing, con DevTools del navegador abierto" width="800" height="415" loading="lazy" decoding="async">
   <figcaption>Paso 1 — el flujo real de phishing, alcanzable solo simulando un iPhone 14 Pro Max en modo responsive. El panel Network de DevTools (derecha) muestra al kit cargando su propio bundle de JS/CSS y llamando a endpoints como <code>/geoinfo</code>, <code>/handshake</code> y <code>/credentials</code>.</figcaption>
 </figure>
 
 <figure class="post-figure">
-  <img src="{{ '/assets/images/writeups/cosevi-smishing/violation-detail.jpg' | relative_url }}" alt="Captura de la pantalla de detalle de la infracción fabricada">
+  <img src="{{ '/assets/images/writeups/cosevi-smishing/violation-detail.jpg' | relative_url }}" alt="Captura de la pantalla de detalle de la infracción fabricada" width="800" height="418" loading="lazy" decoding="async">
   <figcaption>Paso 2 — una infracción de tránsito fabricada con número de placa, artículo legal y monto a pagar, diseñada para generar presión de pago mediante un falso "descuento" del 40% por pago anticipado.</figcaption>
 </figure>
 
 <figure class="post-figure">
-  <img src="{{ '/assets/images/writeups/cosevi-smishing/card-capture.jpg' | relative_url }}" alt="Captura del formulario de robo de datos de tarjeta bancaria">
+  <img src="{{ '/assets/images/writeups/cosevi-smishing/card-capture.jpg' | relative_url }}" alt="Captura del formulario de robo de datos de tarjeta bancaria" width="800" height="419" loading="lazy" decoding="async">
   <figcaption>Paso 3 — el formulario de robo de datos bancarios, capturando número de tarjeta completo, vencimiento y CVV, con un diseño que imita una página de pago legítima costarricense listando bancos locales reconocibles.</figcaption>
 </figure>
 
