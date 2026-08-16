@@ -189,14 +189,26 @@ img { max-width: 100%; display: block; }
 }
 
 .chrome-nav a {
+  position: relative;
   text-decoration: none;
   color: var(--fg-dim);
+  padding-bottom: 2px;
 }
 .chrome-nav a:hover {
   color: var(--fg-subtle);
 }
 .chrome-nav a.is-active {
   color: var(--accent-active);
+}
+.chrome-nav a.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: var(--accent-active);
+  border-radius: 1px;
 }
 
 @media (min-width: 641px) {
