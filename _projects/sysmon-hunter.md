@@ -2,6 +2,10 @@
 title: sysmon-hunter
 tagline: A real-time detection and correlation engine for Windows Sysmon telemetry — 173 ATT&CK-mapped rules plus statistical detectors for beaconing, recon bursts, and network scans, correlated into incidents and served through a live analyst console.
 stack: [Python, FastAPI, Sysmon, Sigma, SQLite, SQLAlchemy, WebSocket, MITRE ATT&CK, Docker, Prometheus]
+description: >-
+  A real-time Sysmon detection and correlation engine — 173 ATT&CK-mapped
+  rules plus statistical detectors for beaconing, recon, and scans,
+  correlated into incidents with a live analyst console.
 repo_url: https://github.com/Emmazch22/sysmon-hunter
 category: Detection Engineering
 status: active

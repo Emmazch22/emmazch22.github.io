@@ -2,6 +2,10 @@
 layout: default
 title: Projects
 permalink: /projects/
+description: >-
+  Detection engineering tooling built and maintained by Emmanuel Zúñiga,
+  including sysmon-hunter, a real-time Sysmon detection and correlation
+  engine with a live analyst console.
 ---
 <div class="page-head">
   <div class="page-prompt">$ ls ./projects</div>

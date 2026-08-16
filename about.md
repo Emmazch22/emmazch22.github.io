@@ -2,6 +2,10 @@
 layout: default
 title: About
 permalink: /about/
+description: >-
+  Cybersecurity Analyst specialized in threat hunting and detection
+  engineering, currently protecting enterprise environments via MDR
+  operations. Background, certifications, and stack.
 ---
 <div class="page-head">
   <div class="page-prompt">$ cat ./about.md</div>

@@ -2,6 +2,9 @@
 layout: default
 title: Writeups
 permalink: /writeups/
+description: >-
+  Threat hunts, detection engineering breakdowns, and phishing/malware
+  campaign analysis from real-world investigations.
 ---
 <div class="page-head">
   <div class="page-prompt">$ ls ./writeups</div>

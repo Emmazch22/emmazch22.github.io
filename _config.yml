@@ -7,6 +7,8 @@ description: >-
 author: Emmanuel Zúñiga
 url: "https://emmazch22.github.io"
 baseurl: ""
+logo: /assets/images/apple-touch-icon.png
+image: /assets/images/apple-touch-icon.png
 
 github_username: Emmazch22
 linkedin_username: emmazch
