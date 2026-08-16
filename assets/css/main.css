@@ -1296,3 +1296,114 @@ img { max-width: 100%; display: block; }
 .highlight .nb, .highlight .bp { color: var(--fg-bright); }
 .highlight .mi, .highlight .mf { color: var(--severity-medium); }
 .highlight .o, .highlight .p { color: var(--fg-muted); }
+
+/* ==========================================================================
+   contact modal
+   ========================================================================== */
+
+.chrome-nav-contact {
+  position: relative;
+  font: inherit;
+  background: none;
+  border: none;
+  padding-bottom: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--fg-dim);
+}
+.chrome-nav-contact:hover {
+  color: var(--fg-subtle);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: oklch(10% 0.01 210 / 0.72);
+  backdrop-filter: blur(3px);
+  animation: fadeUp 0.15s ease-out both;
+}
+.modal-overlay[hidden] {
+  display: none;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 24px 24px;
+  box-shadow: 0 20px 60px oklch(0% 0 0 / 0.5);
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--fg-dim);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+.modal-close:hover {
+  color: var(--fg-bright);
+  border-color: var(--accent);
+}
+
+.modal-prompt {
+  font: 500 12px/1 var(--font-mono);
+  color: var(--fg-dim);
+  margin: 0 0 10px;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--fg-bright);
+  margin: 0 0 14px;
+}
+
+.modal-email {
+  font: 500 13.5px/1.5 var(--font-mono);
+  color: var(--accent);
+  word-break: break-all;
+  margin: 0 0 22px;
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 420px) {
+  .modal {
+    padding: 24px 18px 20px;
+  }
+  .modal-actions {
+    flex-direction: column;
+  }
+  .modal-actions .btn-primary,
+  .modal-actions .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+}
