@@ -23,6 +23,58 @@ permalink: /about/
     <a href="{{ '/writeups/' | relative_url }}">writeups</a>.
   </p>
 
+  <h2 class="section-title">$ cat ./experience.txt</h2>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-head">
+        <span class="exp-role">Vigilance MDR Security Analyst</span>
+        <span class="exp-dates">Dec 2025 &mdash; Present</span>
+      </div>
+      <div class="exp-org">SentinelOne &middot; Remote, Costa Rica</div>
+      <ul class="plain-list">
+        <li>Investigate and respond to 100+ daily security incidents across multi-tenant environments; perform triage, risk assessment, and escalation to ensure SLA compliance</li>
+        <li>Conduct threat hunting using endpoint behavioral analysis and digital forensics; perform root cause analysis to identify attack vectors and prevent recurrence</li>
+        <li>Analyze endpoint, network, and threat intelligence data to determine malicious patterns and correlate findings with MITRE ATT&amp;CK</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-head">
+        <span class="exp-role">Cyber Security Operations Analyst &mdash; Intermediate</span>
+        <span class="exp-dates">Nov 2024 &mdash; Dec 2025</span>
+      </div>
+      <div class="exp-org">Equifax &middot; Mata Redonda, San Jos&eacute;</div>
+      <ul class="plain-list">
+        <li>Investigated real-time security alerts and incidents from SIEM, EDR, proxy, and threat intelligence sources</li>
+        <li>Engineered 10+ detection use cases and correlation rules; validated detection accuracy across 300+ daily events</li>
+        <li>Developed custom Python scripts for incident automation, log enrichment, and OSINT correlation, cutting alert triage time by 30%</li>
+        <li>Conducted vulnerability assessments and cloud security reviews; mentored junior analysts on investigation techniques</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-head">
+        <span class="exp-role">Cyber Security Operations Analyst &mdash; Entry</span>
+        <span class="exp-dates">Jan 2024 &mdash; Nov 2024</span>
+      </div>
+      <div class="exp-org">Equifax &middot; Mata Redonda, San Jos&eacute;</div>
+      <ul class="plain-list">
+        <li>Performed incident triage on 2,000+ security alerts; assessed severity and escalated validated threats</li>
+        <li>Optimized SIEM rules and EDR detection parameters, improving detection precision and reducing false positives</li>
+        <li>Developed automated incident response workflows on a SOAR platform to accelerate containment</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-head">
+        <span class="exp-role">Cyber Threat Detection Engineer &mdash; Intern</span>
+        <span class="exp-dates">Jul 2023 &mdash; Dec 2023</span>
+      </div>
+      <div class="exp-org">Equifax &middot; Mata Redonda, San Jos&eacute;</div>
+      <ul class="plain-list">
+        <li>Analyzed security alerts and EDR telemetry to optimize detection logic, reducing false positive rates through iterative tuning</li>
+        <li>Developed and validated EDR detection rules aligned to threat behaviors and attack patterns</li>
+      </ul>
+    </div>
+  </div>
+
   <h2 class="section-title">$ cat ./certifications.txt</h2>
   <ul class="plain-list">
     <li>eCTHP &mdash; eLearnSecurity Certified Threat Hunting Professional</li>
