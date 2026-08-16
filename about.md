@@ -13,17 +13,11 @@ permalink: /about/
   <section class="about-hero reveal">
     <h2 class="about-name">Emmanuel Zúñiga</h2>
     <p class="about-role">Cybersecurity Analyst at SentinelOne</p>
-    <div class="about-focus">
-      <span>Threat Hunting</span>
-      <span class="about-focus-sep" aria-hidden="true">|</span>
-      <span>Detection Engineering</span>
-      <span class="about-focus-sep" aria-hidden="true">|</span>
-      <span>Malware Analysis</span>
-    </div>
     <p class="about-summary">
-      Cybersecurity Analyst with experience in MDR operations, threat hunting, detection
-      engineering, and malware analysis. Currently working at SentinelOne, focusing on
-      large-scale investigations, threat detection, and security operations.
+      Cybersecurity Analyst specialized in threat hunting and detection engineering.
+      Currently protecting enterprise environments through MDR operations, while
+      building security tooling and research projects focused on attacker behavior,
+      detection logic, and incident correlation.
     </p>
     <div class="about-hero-actions">
       <a href="{{ '/assets/files/emmanuel-zuniga-resume.pdf' | relative_url }}" class="btn-primary" download>Download resume</a>
@@ -32,50 +26,66 @@ permalink: /about/
   </section>
 
   <section class="about-section">
-    <div class="section-head">
-      <span class="section-prompt">$ cat ./career.log</span>
-      <h2 class="section-heading">Professional Timeline</h2>
-    </div>
+    <h2 class="section-heading">Professional Journey</h2>
     <ol class="timeline">
       <li class="timeline-item reveal">
         <span class="timeline-year">2022</span>
-        <p class="timeline-text">Entered the cybersecurity industry.</p>
+        <p class="timeline-text">Started working in Security Operations.</p>
       </li>
       <li class="timeline-item reveal">
         <span class="timeline-year">2024</span>
-        <p class="timeline-text">Joined Equifax as Cyber Security Operations Analyst.</p>
+        <p class="timeline-text">Cyber Security Operations Analyst &mdash; Equifax.</p>
       </li>
       <li class="timeline-item reveal">
         <span class="timeline-year">2025</span>
-        <p class="timeline-text">Joined SentinelOne MDR.</p>
+        <p class="timeline-text">Vigilance MDR Security Analyst &mdash; SentinelOne.</p>
       </li>
       <li class="timeline-item reveal">
-        <span class="timeline-year">Present</span>
-        <p class="timeline-text">Building personal detection engineering and malware analysis projects.</p>
+        <span class="timeline-year">Today</span>
+        <p class="timeline-text">Building detection engineering, threat hunting, and malware analysis projects.</p>
       </li>
     </ol>
+  </section>
+
+  <section class="about-section">
+    <h2 class="section-heading">What I Focus On</h2>
+    <div class="focus-grid">
+      <article class="focus-card reveal">
+        <h3 class="focus-card-title">Threat Hunting</h3>
+        <p class="focus-card-desc">Investigating attacker behavior through endpoint, network, and log telemetry.</p>
+      </article>
+      <article class="focus-card reveal">
+        <h3 class="focus-card-title">Detection Engineering</h3>
+        <p class="focus-card-desc">Designing detection logic mapped to MITRE ATT&amp;CK techniques.</p>
+      </article>
+      <article class="focus-card reveal">
+        <h3 class="focus-card-title">MDR Operations</h3>
+        <p class="focus-card-desc">Monitoring, triaging, and responding to threats across enterprise environments.</p>
+      </article>
+      <article class="focus-card reveal">
+        <h3 class="focus-card-title">Malware Analysis</h3>
+        <p class="focus-card-desc">Analyzing malicious activity to understand execution patterns and defensive opportunities.</p>
+      </article>
+    </div>
   </section>
 
   {% assign featured = site.projects | where: "slug", "sysmon-hunter" | first %}
   {% if featured %}
   <section class="about-section">
-    <div class="section-head">
-      <span class="section-prompt">$ ls ./projects --pinned</span>
-      <h2 class="section-heading">Featured Project</h2>
-    </div>
+    <h2 class="section-heading">Featured Project</h2>
     <article class="featured-card reveal">
       <div class="featured-card-head">
         <h3 class="featured-card-title">{{ featured.title }}</h3>
         {% if featured.status %}<span class="explorer-item-status status-{{ featured.status | slugify }}">{{ featured.status }}</span>{% endif %}
       </div>
-      <p class="featured-card-desc">A real-time Windows detection and correlation engine built around Sysmon telemetry, ATT&amp;CK-mapped detections, process correlation, and SOC-style investigations.</p>
-      <div class="featured-card-badges">
-        <span class="tag">Sysmon</span>
-        <span class="tag">MITRE ATT&amp;CK</span>
-        <span class="tag">Detection Engineering</span>
-        <span class="tag">Malware Analysis</span>
-        <span class="tag">Threat Hunting</span>
-      </div>
+      <p class="featured-card-desc">A detection and correlation engine designed for Sysmon telemetry that reconstructs process activity, maps detections to MITRE ATT&amp;CK techniques, and groups related events into actionable incidents.</p>
+      <ul class="featured-card-capabilities">
+        <li>Real-time event ingestion</li>
+        <li>ATT&amp;CK-mapped detection rules</li>
+        <li>ProcessGuid correlation</li>
+        <li>Incident reconstruction</li>
+        <li>SOC-focused investigation workflow</li>
+      </ul>
       <div class="featured-card-cta">
         <a href="{{ featured.url | relative_url }}" class="btn-primary">View Project</a>
         {% if featured.repo_url %}<a href="{{ featured.repo_url }}" target="_blank" rel="noopener" class="btn-ghost">Repository &rarr;</a>{% endif %}
@@ -85,64 +95,16 @@ permalink: /about/
   {% endif %}
 
   <section class="about-section">
-    <div class="section-head">
-      <span class="section-prompt">$ cat ./highlights.txt</span>
-      <h2 class="section-heading">Professional Highlights</h2>
-    </div>
-    <div class="metrics-grid">
-      <div class="metric-card reveal">
-        <span class="metric-value" data-count="3" data-suffix="+">0</span>
-        <span class="metric-label">Years Experience</span>
-      </div>
-      <div class="metric-card reveal">
-        <span class="metric-icon" aria-hidden="true">&gt;_</span>
-        <span class="metric-label">MDR Operations</span>
-      </div>
-      <div class="metric-card reveal">
-        <span class="metric-icon" aria-hidden="true">&gt;_</span>
-        <span class="metric-label">Threat Hunting</span>
-      </div>
-      <div class="metric-card reveal">
-        <span class="metric-icon" aria-hidden="true">&gt;_</span>
-        <span class="metric-label">Detection Engineering</span>
-      </div>
-      <div class="metric-card reveal">
-        <span class="metric-icon" aria-hidden="true">&gt;_</span>
-        <span class="metric-label">Malware Analysis</span>
-      </div>
-      <div class="metric-card reveal">
-        <span class="metric-icon" aria-hidden="true">&gt;_</span>
-        <span class="metric-label">Security Investigations</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="about-section">
-    <div class="section-head">
-      <span class="section-prompt">$ whoami</span>
-      <h2 class="section-heading">About Me</h2>
-    </div>
+    <h2 class="section-heading">Beyond the SOC</h2>
     <p>
-      My interest in security started with wanting to understand how systems actually
-      break &mdash; not just how to defend them, but how an attacker thinks, pivots, and
-      hides. That curiosity turned into a habit of pulling apart malware samples,
-      replaying attack chains, and asking what a detection would need to see to catch
-      them.
-    </p>
-    <p>
-      Outside of work I keep building &mdash; mostly detection engineering and malware
-      analysis tooling like <a href="{{ '/projects/' | relative_url }}">Sysmon Hunter</a>
-      &mdash; and writing up interesting hunts and CVE research in
-      <a href="{{ '/writeups/' | relative_url }}">writeups</a>. I treat the field as
-      something to keep learning, one investigation at a time.
+      Outside of day-to-day MDR operations, I enjoy building detection tools,
+      researching attacker tradecraft, and analyzing malware behavior to better
+      understand how threats evolve and how defenders can respond more effectively.
     </p>
   </section>
 
   <section class="about-section">
-    <div class="section-head">
-      <span class="section-prompt">$ cat ./certifications.txt</span>
-      <h2 class="section-heading">Certifications</h2>
-    </div>
+    <h2 class="section-heading">Certifications</h2>
     <ul class="plain-list">
       <li>eCTHP &mdash; eLearnSecurity Certified Threat Hunting Professional</li>
       <li>PMRP &mdash; Practical Malware Researcher Professional</li>
@@ -152,10 +114,7 @@ permalink: /about/
   </section>
 
   <section class="about-section">
-    <div class="section-head">
-      <span class="section-prompt">$ cat ./stack.txt</span>
-      <h2 class="section-heading">Stack</h2>
-    </div>
+    <h2 class="section-heading">Stack</h2>
     <div class="stack-list">
       <span class="tag">Sysmon</span>
       <span class="tag">Sigma</span>
@@ -171,22 +130,11 @@ permalink: /about/
   </section>
 
   <section class="about-section">
-    <div class="section-head">
-      <span class="section-prompt">$ cat ./contact.txt</span>
-      <h2 class="section-heading">Contact</h2>
-    </div>
+    <h2 class="section-heading">Contact</h2>
     <p>
       <a href="mailto:emmanuel2202zch@gmail.com">emmanuel2202zch@gmail.com</a>
-    </p>
-  </section>
-
-  <section class="about-section">
-    <div class="section-head">
-      <span class="section-prompt">$ ./resume.sh --download</span>
-      <h2 class="section-heading">Resume</h2>
-    </div>
-    <p>
-      <a href="{{ '/assets/files/emmanuel-zuniga-resume.pdf' | relative_url }}" download>emmanuel-zuniga-resume.pdf</a>
+      <span class="contact-sep" aria-hidden="true">&middot;</span>
+      <a href="{{ '/assets/files/emmanuel-zuniga-resume.pdf' | relative_url }}" download>Download resume</a>
     </p>
   </section>
 
@@ -195,29 +143,9 @@ permalink: /about/
 <script>
 (function () {
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function runCounter(el) {
-    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
-    var suffix = el.getAttribute('data-suffix') || '';
-    if (reduced || !target) { el.textContent = target + suffix; return; }
-    var start = null;
-    var duration = 700;
-    function step(ts) {
-      if (start === null) start = ts;
-      var progress = Math.min((ts - start) / duration, 1);
-      el.textContent = Math.round(progress * target) + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
   var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-  var counters = Array.prototype.slice.call(document.querySelectorAll('.metric-value[data-count]'));
 
-  if (reduced || !('IntersectionObserver' in window)) {
-    counters.forEach(runCounter);
-    return;
-  }
+  if (reduced || !('IntersectionObserver' in window)) return;
 
   revealEls.forEach(function (el) {
     el.style.opacity = '0';
@@ -229,10 +157,6 @@ permalink: /about/
       if (!entry.isIntersecting) return;
       entry.target.style.opacity = '';
       entry.target.style.transform = '';
-      if (entry.target.classList.contains('metric-card')) {
-        var counter = entry.target.querySelector('.metric-value[data-count]');
-        if (counter) runCounter(counter);
-      }
       io.unobserve(entry.target);
     });
   }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
