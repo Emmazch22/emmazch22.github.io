@@ -9,101 +9,234 @@ permalink: /about/
 </div>
 
 <div class="about-body">
-  <p>
-    I'm a cybersecurity analyst working in managed detection &amp; response (MDR),
-    focused on threat hunting, detection engineering, and incident triage across
-    endpoint, network, and cloud telemetry. My day-to-day is building and tuning
-    detections, chasing down anomalous behavior, and writing up what I find so
-    the next analyst doesn't have to start from zero.
-  </p>
-  <p>
-    Outside of the queue, I build small tools to speed up log parsing and
-    endpoint triage — see <a href="{{ '/projects/' | relative_url }}">projects</a>
-    — and write up interesting hunts and CVE analysis in
-    <a href="{{ '/writeups/' | relative_url }}">writeups</a>.
-  </p>
 
-  <h2 class="section-title">$ cat ./experience.txt</h2>
-  <div class="exp-list">
-    <div class="exp-item">
-      <div class="exp-head">
-        <span class="exp-role">Vigilance MDR Security Analyst</span>
-        <span class="exp-dates">Dec 2025 &mdash; Present</span>
-      </div>
-      <div class="exp-org">SentinelOne</div>
-      <ul class="plain-list">
-        <li>Investigate and respond to 100+ daily security incidents across multi-tenant environments; perform triage, risk assessment, and escalation to ensure SLA compliance</li>
-        <li>Conduct threat hunting using endpoint behavioral analysis and digital forensics; perform root cause analysis to identify attack vectors and prevent recurrence</li>
-        <li>Analyze endpoint, network, and threat intelligence data to determine malicious patterns and correlate findings with MITRE ATT&amp;CK</li>
-      </ul>
+  <section class="about-hero reveal">
+    <h2 class="about-name">Emmanuel Zúñiga</h2>
+    <p class="about-role">Cybersecurity Analyst at SentinelOne</p>
+    <div class="about-focus">
+      <span>Threat Hunting</span>
+      <span class="about-focus-sep" aria-hidden="true">|</span>
+      <span>Detection Engineering</span>
+      <span class="about-focus-sep" aria-hidden="true">|</span>
+      <span>Malware Analysis</span>
     </div>
-    <div class="exp-item">
-      <div class="exp-head">
-        <span class="exp-role">Cyber Security Operations Analyst &mdash; Intermediate</span>
-        <span class="exp-dates">Nov 2024 &mdash; Dec 2025</span>
-      </div>
-      <div class="exp-org">Equifax</div>
-      <ul class="plain-list">
-        <li>Investigated real-time security alerts and incidents from SIEM, EDR, proxy, and threat intelligence sources</li>
-        <li>Engineered 10+ detection use cases and correlation rules; validated detection accuracy across 300+ daily events</li>
-        <li>Developed custom Python scripts for incident automation, log enrichment, and OSINT correlation, cutting alert triage time by 30%</li>
-        <li>Conducted vulnerability assessments and cloud security reviews; mentored junior analysts on investigation techniques</li>
-      </ul>
+    <p class="about-summary">
+      Cybersecurity Analyst with experience in MDR operations, threat hunting, detection
+      engineering, and malware analysis. Currently working at SentinelOne, focusing on
+      large-scale investigations, threat detection, and security operations.
+    </p>
+    <div class="about-hero-actions">
+      <a href="{{ '/assets/files/emmanuel-zuniga-resume.pdf' | relative_url }}" class="btn-primary" download>Download resume</a>
+      <a href="mailto:emmanuel2202zch@gmail.com" class="btn-ghost">Get in touch</a>
     </div>
-    <div class="exp-item">
-      <div class="exp-head">
-        <span class="exp-role">Cyber Security Operations Analyst &mdash; Entry</span>
-        <span class="exp-dates">Jan 2024 &mdash; Nov 2024</span>
-      </div>
-      <div class="exp-org">Equifax</div>
-      <ul class="plain-list">
-        <li>Performed incident triage on 2,000+ security alerts; assessed severity and escalated validated threats</li>
-        <li>Optimized SIEM rules and EDR detection parameters, improving detection precision and reducing false positives</li>
-        <li>Developed automated incident response workflows on a SOAR platform to accelerate containment</li>
-      </ul>
+  </section>
+
+  <section class="about-section">
+    <div class="section-head">
+      <span class="section-prompt">$ cat ./career.log</span>
+      <h2 class="section-heading">Professional Timeline</h2>
     </div>
-    <div class="exp-item">
-      <div class="exp-head">
-        <span class="exp-role">Cyber Threat Detection Engineer &mdash; Intern</span>
-        <span class="exp-dates">Jul 2023 &mdash; Dec 2023</span>
-      </div>
-      <div class="exp-org">Equifax</div>
-      <ul class="plain-list">
-        <li>Analyzed security alerts and EDR telemetry to optimize detection logic, reducing false positive rates through iterative tuning</li>
-        <li>Developed and validated EDR detection rules aligned to threat behaviors and attack patterns</li>
-      </ul>
+    <ol class="timeline">
+      <li class="timeline-item reveal">
+        <span class="timeline-year">2022</span>
+        <p class="timeline-text">Entered the cybersecurity industry.</p>
+      </li>
+      <li class="timeline-item reveal">
+        <span class="timeline-year">2024</span>
+        <p class="timeline-text">Joined Equifax as Cyber Security Operations Analyst.</p>
+      </li>
+      <li class="timeline-item reveal">
+        <span class="timeline-year">2025</span>
+        <p class="timeline-text">Joined SentinelOne MDR.</p>
+      </li>
+      <li class="timeline-item reveal">
+        <span class="timeline-year">Present</span>
+        <p class="timeline-text">Building personal detection engineering and malware analysis projects.</p>
+      </li>
+    </ol>
+  </section>
+
+  {% assign featured = site.projects | where: "slug", "sysmon-hunter" | first %}
+  {% if featured %}
+  <section class="about-section">
+    <div class="section-head">
+      <span class="section-prompt">$ ls ./projects --pinned</span>
+      <h2 class="section-heading">Featured Project</h2>
     </div>
-  </div>
+    <article class="featured-card reveal">
+      <div class="featured-card-head">
+        <h3 class="featured-card-title">{{ featured.title }}</h3>
+        {% if featured.status %}<span class="explorer-item-status status-{{ featured.status | slugify }}">{{ featured.status }}</span>{% endif %}
+      </div>
+      <p class="featured-card-desc">A real-time Windows detection and correlation engine built around Sysmon telemetry, ATT&amp;CK-mapped detections, process correlation, and SOC-style investigations.</p>
+      <div class="featured-card-badges">
+        <span class="tag">Sysmon</span>
+        <span class="tag">MITRE ATT&amp;CK</span>
+        <span class="tag">Detection Engineering</span>
+        <span class="tag">Malware Analysis</span>
+        <span class="tag">Threat Hunting</span>
+      </div>
+      <div class="featured-card-cta">
+        <a href="{{ featured.url | relative_url }}" class="btn-primary">View Project</a>
+        {% if featured.repo_url %}<a href="{{ featured.repo_url }}" target="_blank" rel="noopener" class="btn-ghost">Repository &rarr;</a>{% endif %}
+      </div>
+    </article>
+  </section>
+  {% endif %}
 
-  <h2 class="section-title">$ cat ./certifications.txt</h2>
-  <ul class="plain-list">
-    <li>eCTHP &mdash; eLearnSecurity Certified Threat Hunting Professional</li>
-    <li>PMRP &mdash; Practical Malware Researcher Professional</li>
-    <li>MCBTA &mdash; Multi-Cloud Blue Team Analyst</li>
-    <li>GCP ACE &mdash; Google Cloud Associate Cloud Engineer</li>
-  </ul>
+  <section class="about-section">
+    <div class="section-head">
+      <span class="section-prompt">$ cat ./highlights.txt</span>
+      <h2 class="section-heading">Professional Highlights</h2>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-card reveal">
+        <span class="metric-value" data-count="3" data-suffix="+">0</span>
+        <span class="metric-label">Years Experience</span>
+      </div>
+      <div class="metric-card reveal">
+        <span class="metric-icon" aria-hidden="true">&gt;_</span>
+        <span class="metric-label">MDR Operations</span>
+      </div>
+      <div class="metric-card reveal">
+        <span class="metric-icon" aria-hidden="true">&gt;_</span>
+        <span class="metric-label">Threat Hunting</span>
+      </div>
+      <div class="metric-card reveal">
+        <span class="metric-icon" aria-hidden="true">&gt;_</span>
+        <span class="metric-label">Detection Engineering</span>
+      </div>
+      <div class="metric-card reveal">
+        <span class="metric-icon" aria-hidden="true">&gt;_</span>
+        <span class="metric-label">Malware Analysis</span>
+      </div>
+      <div class="metric-card reveal">
+        <span class="metric-icon" aria-hidden="true">&gt;_</span>
+        <span class="metric-label">Security Investigations</span>
+      </div>
+    </div>
+  </section>
 
-  <h2 class="section-title">$ cat ./stack.txt</h2>
-  <div class="stack-list">
-    <span class="tag">Sysmon</span>
-    <span class="tag">Sigma</span>
-    <span class="tag">Splunk</span>
-    <span class="tag">Elastic / ELK</span>
-    <span class="tag">EVTX</span>
-    <span class="tag">Python</span>
-    <span class="tag">PowerShell</span>
-    <span class="tag">YARA</span>
-    <span class="tag">MITRE ATT&amp;CK</span>
-    <span class="tag">Windows Internals</span>
-  </div>
+  <section class="about-section">
+    <div class="section-head">
+      <span class="section-prompt">$ whoami</span>
+      <h2 class="section-heading">About Me</h2>
+    </div>
+    <p>
+      My interest in security started with wanting to understand how systems actually
+      break &mdash; not just how to defend them, but how an attacker thinks, pivots, and
+      hides. That curiosity turned into a habit of pulling apart malware samples,
+      replaying attack chains, and asking what a detection would need to see to catch
+      them.
+    </p>
+    <p>
+      Outside of work I keep building &mdash; mostly detection engineering and malware
+      analysis tooling like <a href="{{ '/projects/' | relative_url }}">Sysmon Hunter</a>
+      &mdash; and writing up interesting hunts and CVE research in
+      <a href="{{ '/writeups/' | relative_url }}">writeups</a>. I treat the field as
+      something to keep learning, one investigation at a time.
+    </p>
+  </section>
 
-  <h2 class="section-title">$ cat ./contact.txt</h2>
-  <p>
-    <a href="mailto:emmanuel2202zch@gmail.com">emmanuel2202zch@gmail.com</a>
-  </p>
+  <section class="about-section">
+    <div class="section-head">
+      <span class="section-prompt">$ cat ./certifications.txt</span>
+      <h2 class="section-heading">Certifications</h2>
+    </div>
+    <ul class="plain-list">
+      <li>eCTHP &mdash; eLearnSecurity Certified Threat Hunting Professional</li>
+      <li>PMRP &mdash; Practical Malware Researcher Professional</li>
+      <li>MCBTA &mdash; Multi-Cloud Blue Team Analyst</li>
+      <li>GCP ACE &mdash; Google Cloud Associate Cloud Engineer</li>
+    </ul>
+  </section>
 
-  <h2 class="section-title">$ ./resume.sh --download</h2>
-  <p>
-    <a href="{{ '/assets/files/emmanuel-zuniga-resume.pdf' | relative_url }}" download>emmanuel-zuniga-resume.pdf</a>
-  </p>
+  <section class="about-section">
+    <div class="section-head">
+      <span class="section-prompt">$ cat ./stack.txt</span>
+      <h2 class="section-heading">Stack</h2>
+    </div>
+    <div class="stack-list">
+      <span class="tag">Sysmon</span>
+      <span class="tag">Sigma</span>
+      <span class="tag">Splunk</span>
+      <span class="tag">Elastic / ELK</span>
+      <span class="tag">EVTX</span>
+      <span class="tag">Python</span>
+      <span class="tag">PowerShell</span>
+      <span class="tag">YARA</span>
+      <span class="tag">MITRE ATT&amp;CK</span>
+      <span class="tag">Windows Internals</span>
+    </div>
+  </section>
+
+  <section class="about-section">
+    <div class="section-head">
+      <span class="section-prompt">$ cat ./contact.txt</span>
+      <h2 class="section-heading">Contact</h2>
+    </div>
+    <p>
+      <a href="mailto:emmanuel2202zch@gmail.com">emmanuel2202zch@gmail.com</a>
+    </p>
+  </section>
+
+  <section class="about-section">
+    <div class="section-head">
+      <span class="section-prompt">$ ./resume.sh --download</span>
+      <h2 class="section-heading">Resume</h2>
+    </div>
+    <p>
+      <a href="{{ '/assets/files/emmanuel-zuniga-resume.pdf' | relative_url }}" download>emmanuel-zuniga-resume.pdf</a>
+    </p>
+  </section>
+
 </div>
+
+<script>
+(function () {
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function runCounter(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    var suffix = el.getAttribute('data-suffix') || '';
+    if (reduced || !target) { el.textContent = target + suffix; return; }
+    var start = null;
+    var duration = 700;
+    function step(ts) {
+      if (start === null) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      el.textContent = Math.round(progress * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  var counters = Array.prototype.slice.call(document.querySelectorAll('.metric-value[data-count]'));
+
+  if (reduced || !('IntersectionObserver' in window)) {
+    counters.forEach(runCounter);
+    return;
+  }
+
+  revealEls.forEach(function (el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(12px)';
+  });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.style.opacity = '';
+      entry.target.style.transform = '';
+      if (entry.target.classList.contains('metric-card')) {
+        var counter = entry.target.querySelector('.metric-value[data-count]');
+        if (counter) runCounter(counter);
+      }
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.2, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(function (el) { io.observe(el); });
+})();
+</script>
