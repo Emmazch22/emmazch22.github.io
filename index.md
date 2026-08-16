@@ -1,7 +1,7 @@
 ---
 layout: home
 title: Home
-hero_name: emmazch22
+hero_name: Emmanuel Zuniga
 tagline: "Cybersecurity Analyst — Detection & Threat Hunting"
 intro: >-
   I build detection logic and hunt for adversary behavior across endpoint,
