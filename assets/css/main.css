@@ -1193,6 +1193,111 @@ img { max-width: 100%; display: block; }
   gap: 12px;
 }
 
+/* --- certifications carousel --- */
+
+.cert-carousel {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-raised);
+  padding: 16px 16px 20px;
+}
+.cert-carousel:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+.cert-carousel-viewport {
+  overflow: hidden;
+  border-radius: 6px;
+}
+.cert-carousel-track {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transition: transform 0.35s ease;
+}
+.cert-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+.cert-slide-link {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.cert-slide-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.cert-slide-caption {
+  padding: 14px 4px 0;
+  text-align: center;
+}
+.cert-slide-title {
+  font: 600 14.5px/1.3 var(--font-mono);
+  color: var(--fg-bright);
+  margin: 0 0 4px;
+}
+.cert-slide-issuer {
+  font-size: 12.5px;
+  color: var(--fg-body);
+  margin: 0;
+}
+.cert-carousel-btn {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-raised);
+  color: var(--fg-subtle);
+  font: 14px/1 var(--font-mono);
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.cert-carousel-btn:hover,
+.cert-carousel-btn:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.cert-carousel-prev { left: 4px; }
+.cert-carousel-next { right: 4px; }
+.cert-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+.cert-carousel-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.cert-carousel-dot[aria-selected="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cert-carousel-track { transition: none; }
+}
+
+@media (min-width: 641px) {
+  .cert-carousel { padding: 20px 56px 24px; }
+  .cert-carousel-btn { top: 44%; }
+}
+
 /* --- what I focus on --- */
 
 .focus-grid {
