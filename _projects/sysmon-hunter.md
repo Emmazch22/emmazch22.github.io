@@ -1,20 +1,21 @@
 ---
 title: sysmon-hunter
-tagline: A real-time detection and correlation engine for Windows Sysmon telemetry — 173 ATT&CK-mapped rules plus statistical detectors for beaconing, recon bursts, and network scans, correlated into incidents and served through a live analyst console.
+tagline: A real-time detection and correlation engine for Windows Sysmon telemetry — 192 ATT&CK-mapped rules plus statistical detectors for beaconing, recon bursts, and network scans, correlated into incidents and served through a live analyst console.
 stack: [Python, FastAPI, Sysmon, Sigma, SQLite, SQLAlchemy, WebSocket, MITRE ATT&CK, Docker, Prometheus]
 description: >-
-  A real-time Sysmon detection and correlation engine — 173 ATT&CK-mapped
+  A real-time Sysmon detection and correlation engine — 192 ATT&CK-mapped
   rules plus statistical detectors for beaconing, recon, and scans,
   correlated into incidents with a live analyst console.
 repo_url: https://github.com/Emmazch22/sysmon-hunter
 category: Detection Engineering
 status: active
 achievements:
-  - 173 hand-written YAML rules across all 23 Sysmon event types the engine understands, indexed by EventID and mapped to MITRE ATT&CK
+  - 192 hand-written YAML rules across all 23 Sysmon event types the engine understands, indexed by EventID and mapped to MITRE ATT&CK
   - Three statistical detectors — C2 beaconing (median/MAD, jitter-resistant), recon bursts (distinct ATT&CK techniques, not raw volume), and network scans (dual IP/port threshold) — catching what no single-event rule can see
   - Correlates detections by process-tree root (Sysmon ProcessGuid, never PID) into incidents with a non-linear severity score, a derived kill-chain narrative, and three named correlation chains for ransomware, credential-theft, and Office-to-PowerShell infection patterns
   - Live WebSocket console — interactive process tree, attack timeline, full-text/field search, false-positive similarity scoring, IOC enrichment via AbuseIPDB/VirusTotal, PDF incident reports, and STIX 2.1 / ATT&CK Navigator export
-  - Every rule validated against real malware telemetry replayed from the EVTX-ATTACK-SAMPLES corpus, backed by a 742-test suite where each rule ships both a true-positive and a true-negative case
+  - A stats dashboard charting incident trends, severity mix, triage status, and top rules/ATT&CK techniques, alongside Prometheus metrics, structured JSON logging, and five self-audited security fixes (WebSocket auth, a ReDoS guard on imported Sigma rules, XSS-safe IOC links, an LRU-capped rate limiter, and a streaming request-body size cap)
+  - Every rule validated against real malware telemetry replayed from the EVTX-ATTACK-SAMPLES corpus, backed by a 788-test suite where each rule ships both a true-positive and a true-negative case
 order: 1
 ---
 
@@ -37,7 +38,7 @@ Sigma-style rule to match a sample.
 
 **Detection corpus**
 
-- 173 YAML rules, Sigma-compatible in matching semantics (`equals`,
+- 192 YAML rules, Sigma-compatible in matching semantics (`equals`,
   `contains`, `startswith`, `endswith`, `re`, all invertible with `|not`),
   indexed by EventID so only relevant rules evaluate per event.
 - Covers every Sysmon event type the engine understands: process creation,
@@ -81,9 +82,15 @@ Sigma-style rule to match a sample.
 - Sigma rule import (upload and go live with no restart), STIX 2.1 export,
   and an ATT&CK Navigator coverage report that turns the rule corpus into a
   prioritized worklist of what to write next.
+- A stats dashboard — incidents per day, severity distribution, triage
+  status breakdown, and the top 10 rules and ATT&CK techniques by detection
+  count — rendered as plain HTML/CSS bar charts, no charting library.
 - Production-hardening knobs off by default: Prometheus metrics, structured
   JSON logging, an ingest rate limiter, and API-key auth on every JSON
-  route.
+  route, plus five fixes from a self-audit (WebSocket auth on the same
+  shared secret, a ReDoS guard timing-probing imported Sigma regexes before
+  they reach the matcher, XSS-safe IOC provider links, an LRU-capped
+  rate-limiter bucket, and a streaming byte cap on `/ingest`).
 
 Read the detection-engineering breakdown of how the rule engine, the
 statistical detectors, and the incident correlation logic actually work in
