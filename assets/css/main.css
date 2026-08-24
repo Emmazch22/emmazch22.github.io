@@ -1411,6 +1411,10 @@ img { max-width: 100%; display: block; }
   margin: 8px 0 24px;
 }
 .post-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
   border: 1px solid var(--border);
   border-radius: 6px;
 }
