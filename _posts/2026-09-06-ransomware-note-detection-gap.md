@@ -16,18 +16,18 @@ bilingual: true
 
 ## TL;DR
 
-- **Techniques:** T1490 — Inhibit System Recovery (shadow copy deletion) and
-  T1486 — Data Encrypted for Impact (simulated ransom note drop)
-- **Result:** ✅ Both detected — `SYS-004` fired twice on the shadow copy
+- **Techniques:** T1490 (Inhibit System Recovery, shadow copy deletion) and
+  T1486 (Data Encrypted for Impact, simulated ransom note drop)
+- **Result:** ✅ Both detected. `SYS-004` fired twice on the shadow copy
   deletion, `SYS-080` fired once on the ransom note, split into two incidents
   by process-tree ancestry
 - **Bug found mid-exercise, and it wasn't the rule:** the ransom note produced
   no Sysmon FileCreate event at all on the first run. SwiftOnSecurity's Sysmon
-  config treats FileCreate as an allowlist — specific extensions and folders
-  only — and a plain `.txt` ransom note on the desktop isn't on it
+  config treats FileCreate as an allowlist (specific extensions and folders
+  only), and a plain `.txt` ransom note on the desktop isn't on it
 - **Regression check:** replayed the same `.onion`-containing ransom note
   text that caused a false Tor detection under an earlier version of
-  `SYS-189` in a prior exercise — the fixed rule stayed quiet this time,
+  `SYS-189` in a prior exercise. The fixed rule stayed quiet this time,
   confirming the fix still holds
 
 ---
@@ -35,10 +35,10 @@ bilingual: true
 ## Lab Setup: An Isolated Jump Box
 
 This exercise involves deleting shadow copies and dropping ransomware
-artifacts on disk — not something worth running on a VM with any live path
+artifacts on disk, not something worth running on a VM with any live path
 back to the host. So the lab topology changed from the previous exercise:
 
-- FlareVM now sits on a VirtualBox Internal Network adapter only — no NAT, no
+- FlareVM now sits on a VirtualBox Internal Network adapter only, no NAT, no
   route out
 - A separate Kali VM has two adapters: one on that same internal network to
   reach FlareVM, one on NAT for its own connectivity
@@ -86,7 +86,7 @@ Invoke-AtomicTest T1490 -TestNumbers 1
 
 <figure class="post-figure">
   <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/02_t1490_execution.png' | relative_url }}" alt="Atomic Red Team executing T1490 test 1, running vssadmin delete shadows through cmd.exe" width="1262" height="888" loading="lazy" decoding="async">
-  <figcaption>Figure 2: T1490 test #1 executing — <code>vssadmin delete shadows /all /quiet</code>, launched through <code>cmd.exe</code> at <code>2026-09-06T20:35:36 UTC</code>.</figcaption>
+  <figcaption>Figure 2: T1490 test #1 executing: <code>vssadmin delete shadows /all /quiet</code>, launched through <code>cmd.exe</code> at <code>2026-09-06T20:35:36 UTC</code>.</figcaption>
 </figure>
 
 ```powershell
@@ -108,7 +108,7 @@ Invoke-AtomicTest T1486 -TestNumbers 10
 
 <figure class="post-figure">
   <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/04_t1486_execution.png' | relative_url }}" alt="Atomic Red Team executing T1486 test 10, dropping an akira_readme.txt ransom note on the desktop" width="1259" height="886" loading="lazy" decoding="async">
-  <figcaption>Figure 4: T1486 test #10 executing — drops <code>akira_readme.txt</code> on the desktop, a fairly standard ransom note referencing payment terms and a contact channel.</figcaption>
+  <figcaption>Figure 4: T1486 test #10 executing: drops <code>akira_readme.txt</code> on the desktop, a fairly standard ransom note referencing payment terms and a contact channel.</figcaption>
 </figure>
 
 ---
@@ -127,12 +127,12 @@ Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" -MaxEvents 20 |
 
 <figure class="post-figure">
   <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/05_filecreate_confirmed.png' | relative_url }}" alt="Sysmon Operational log showing FileCreate Event ID 11 entries after adjusting the Sysmon configuration" width="1264" height="868" loading="lazy" decoding="async">
-  <figcaption>Figure 5: FileCreate (Event ID 11) entries in the Sysmon log — but only after adjusting the configuration. The first time this query ran, against the original SwiftOnSecurity config, nothing came back.</figcaption>
+  <figcaption>Figure 5: FileCreate (Event ID 11) entries in the Sysmon log, but only after adjusting the configuration. The first time this query ran, against the original SwiftOnSecurity config, nothing came back.</figcaption>
 </figure>
 
 Turns out the SwiftOnSecurity Sysmon config handles FileCreate as an
 allowlist, not a blocklist. It only logs the event for a specific set of
-extensions it considers dangerous — things like `.exe`, `.ps1`, `.dmp` — plus
+extensions it considers dangerous, things like `.exe`, `.ps1`, `.dmp`, plus
 a handful of folders like Downloads or Startup. A plain `.txt` file on the
 desktop isn't on that list at all.
 
@@ -183,22 +183,22 @@ python3 scripts/replay_evtx.py --file /home/kali/sysmon_export_ransomware.evtx
 
 <figure class="post-figure">
   <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/09_replay_after_fix.png' | relative_url }}" alt="Terminal output from replay_evtx.py showing SYS-004 firing twice and SYS-080 firing once" width="1276" height="952" loading="lazy" decoding="async">
-  <figcaption>Figure 8: Replay result after the Sysmon config fix — <code>SYS-004</code> fired twice, <code>SYS-080</code> fired once. Both techniques caught.</figcaption>
+  <figcaption>Figure 8: Replay result after the Sysmon config fix: <code>SYS-004</code> fired twice, <code>SYS-080</code> fired once. Both techniques caught.</figcaption>
 </figure>
 
 <figure class="post-figure">
   <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/10_incident_queue.png' | relative_url }}" alt="sysmon-hunter console showing two incidents in the queue, both critical" width="1265" height="915" loading="lazy" decoding="async">
-  <figcaption>Figure 9: Two incidents in the queue. "Ransomware preparation on DESKTOP-6VMFSGO" scored 28, CRITICAL, 2 detections, mapped to T1490. A separate incident covered the ransom note. They stayed apart because they're rooted in different process trees — <code>powershell.exe</code> on one side, <code>cmd.exe</code> spawning <code>vssadmin.exe</code> on the other — which makes sense since these were two unrelated atomic tests run moments apart.</figcaption>
+  <figcaption>Figure 9: Two incidents in the queue. "Ransomware preparation on DESKTOP-6VMFSGO" scored 28, CRITICAL, 2 detections, mapped to T1490. A separate incident covered the ransom note. They stayed apart because they're rooted in different process trees: <code>powershell.exe</code> on one side, <code>cmd.exe</code> spawning <code>vssadmin.exe</code> on the other. Makes sense, these were two unrelated atomic tests run moments apart.</figcaption>
 </figure>
 
 <figure class="post-figure">
   <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/12_process_tree_destructive.png' | relative_url }}" alt="Process tree view for the ransom note incident showing the full command line including an onion domain reference" width="1267" height="919" loading="lazy" decoding="async">
-  <figcaption>Figure 10: Process tree for the ransom note incident. The full command line behind the note includes a <code>hxxps[://]akira[.]onion</code> contact reference. In an earlier exercise, that exact kind of text caused a false Tor detection under an older version of a different rule, <code>SYS-189</code>, which used to match any command line containing <code>.onion</code> regardless of context. After that rule got split so it only fires on the real Tor binary or a genuine network reference, this run was the first time similar text showed up again in a fresh replay. It fired nothing related to Tor — the fix held.</figcaption>
+  <figcaption>Figure 10: Process tree for the ransom note incident. The full command line behind the note includes a <code>hxxps[://]akira[.]onion</code> contact reference. In an earlier exercise, that exact kind of text caused a false Tor detection under an older version of a different rule, <code>SYS-189</code>, which used to match any command line containing <code>.onion</code> regardless of context. After that rule got split so it only fires on the real Tor binary or a genuine network reference, this run was the first time similar text showed up again in a fresh replay. It fired nothing related to Tor. The fix held.</figcaption>
 </figure>
 
 <figure class="post-figure">
   <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/13_process_tree_shadow.png' | relative_url }}" alt="Process tree view for the shadow copy incident showing cmd.exe spawning vssadmin.exe" width="1262" height="955" loading="lazy" decoding="async">
-  <figcaption>Figure 11: Process tree for the shadow copy incident — <code>cmd.exe</code> to <code>vssadmin.exe</code>, the same shape as the shadow copy detection from an earlier exercise, unaffected by anything in this run.</figcaption>
+  <figcaption>Figure 11: Process tree for the shadow copy incident: <code>cmd.exe</code> to <code>vssadmin.exe</code>, the same shape as the shadow copy detection from an earlier exercise, unaffected by anything in this run.</figcaption>
 </figure>
 
 ---
@@ -249,33 +249,33 @@ Raw `.evtx` export and sysmon-hunter's JSON logs are available on request.
 
 ## TL;DR
 
-- **Técnicas:** T1490 — Inhibit System Recovery (borrado de shadow copies) y
-  T1486 — Data Encrypted for Impact (nota de rescate simulada)
-- **Resultado:** ✅ Ambas detectadas — `SYS-004` disparó dos veces con el
-  borrado de shadow copies, `SYS-080` disparó una vez con la nota de rescate,
+- **Técnicas:** T1490 (Inhibit System Recovery, borrado de shadow copies) y
+  T1486 (Data Encrypted for Impact, ransom note simulada)
+- **Resultado:** ✅ ambas detectadas. `SYS-004` disparó dos veces con el
+  borrado de shadow copies, `SYS-080` disparó una vez con la ransom note,
   separadas en dos incidentes por ascendencia del árbol de procesos
-- **Bug encontrado a mitad del ejercicio, y no era la regla:** la nota de
-  rescate no generó ningún evento FileCreate de Sysmon en la primera corrida.
-  La configuración de Sysmon de SwiftOnSecurity trata FileCreate como una
-  lista blanca — solo ciertas extensiones y carpetas — y un simple `.txt` en
-  el escritorio no está en esa lista
-- **Prueba de regresión:** se reprodujo el mismo texto de la nota de rescate
-  que contiene un dominio `.onion` y que había causado una falsa detección de
-  Tor bajo una versión anterior de `SYS-189` en un ejercicio previo — la
-  regla corregida permaneció en silencio esta vez, confirmando que la
-  corrección sigue funcionando
+- **Bug encontrado a mitad del ejercicio, y no era la regla:** la ransom note
+  no generó ningún evento FileCreate de Sysmon en la primera corrida. La
+  configuración de Sysmon de SwiftOnSecurity trata FileCreate como una
+  allowlist (solo ciertas extensiones y carpetas), y un simple `.txt` en el
+  escritorio no está en esa lista
+- **Prueba de regresión:** se reprodujo el mismo texto de la ransom note con
+  un dominio `.onion`, el mismo que había causado una falsa detección de Tor
+  bajo una versión anterior de `SYS-189` en un ejercicio previo. La regla
+  corregida permaneció en silencio esta vez, confirmando que la corrección
+  sigue funcionando
 
 ---
 
 ## Configuración del laboratorio: un jump box aislado
 
 Este ejercicio implica borrar shadow copies y dejar artefactos de ransomware
-en disco — no es algo que valga la pena correr en una VM con cualquier ruta
-en vivo de vuelta al host. Así que la topología del laboratorio cambió
-respecto al ejercicio anterior:
+en disco, algo que no vale la pena correr en una VM con cualquier ruta en
+vivo de vuelta al host. Por eso la topología del laboratorio cambió respecto
+al ejercicio anterior:
 
 - FlareVM ahora está únicamente en un adaptador Internal Network de
-  VirtualBox — sin NAT, sin salida
+  VirtualBox, sin NAT y sin salida
 - Una VM Kali separada tiene dos adaptadores: uno en esa misma red interna
   para alcanzar a FlareVM, y otro en NAT para su propia conectividad
 - Kali corre su propia copia local de sysmon-hunter, así que el replay ocurre
@@ -290,9 +290,9 @@ que corre en el propio Kali.
 ## Hipótesis
 
 El corpus de reglas de sysmon-hunter tiene una regla para cada técnica:
-`SYS-004` para el borrado de shadow copies, `SYS-080` para una nota de
-rescate en disco, identificada por convención de nombre de archivo. Correr
-las pruebas T1490 y T1486 de Atomic Red Team debería disparar ambas.
+`SYS-004` para el borrado de shadow copies, `SYS-080` para una ransom note
+en disco, identificada por convención de nombre de archivo. Correr las
+pruebas T1490 y T1486 de Atomic Red Team debería disparar ambas.
 
 ---
 
@@ -322,7 +322,7 @@ Invoke-AtomicTest T1490 -TestNumbers 1
 
 <figure class="post-figure">
   <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/02_t1490_execution.png' | relative_url }}" alt="Atomic Red Team ejecutando la prueba 1 de T1490, corriendo vssadmin delete shadows a través de cmd.exe" width="1262" height="888" loading="lazy" decoding="async">
-  <figcaption>Figura 2: prueba #1 de T1490 ejecutándose — <code>vssadmin delete shadows /all /quiet</code>, lanzado a través de <code>cmd.exe</code> a las <code>2026-09-06T20:35:36 UTC</code>.</figcaption>
+  <figcaption>Figura 2: prueba #1 de T1490 ejecutándose: <code>vssadmin delete shadows /all /quiet</code>, lanzado a través de <code>cmd.exe</code> a las <code>2026-09-06T20:35:36 UTC</code>.</figcaption>
 </figure>
 
 ```powershell
@@ -343,8 +343,8 @@ Invoke-AtomicTest T1486 -TestNumbers 10
 ```
 
 <figure class="post-figure">
-  <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/04_t1486_execution.png' | relative_url }}" alt="Atomic Red Team ejecutando la prueba 10 de T1486, dejando una nota de rescate akira_readme.txt en el escritorio" width="1259" height="886" loading="lazy" decoding="async">
-  <figcaption>Figura 4: prueba #10 de T1486 ejecutándose — deja <code>akira_readme.txt</code> en el escritorio, una nota de rescate bastante estándar que menciona términos de pago y un canal de contacto.</figcaption>
+  <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/04_t1486_execution.png' | relative_url }}" alt="Atomic Red Team ejecutando la prueba 10 de T1486, dejando una ransom note akira_readme.txt en el escritorio" width="1259" height="886" loading="lazy" decoding="async">
+  <figcaption>Figura 4: prueba #10 de T1486 ejecutándose: deja <code>akira_readme.txt</code> en el escritorio, una ransom note bastante estándar que menciona términos de pago y un canal de contacto.</figcaption>
 </figure>
 
 ---
@@ -353,7 +353,7 @@ Invoke-AtomicTest T1486 -TestNumbers 10
 
 Antes incluso de revisar sysmon-hunter, corrí una consulta que me había
 saltado en el ejercicio anterior: ¿Sysmon realmente registró un evento
-FileCreate por la escritura de la nota?
+FileCreate por la escritura de la ransom note?
 
 ```powershell
 Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" -MaxEvents 20 |
@@ -363,18 +363,18 @@ Get-WinEvent -LogName "Microsoft-Windows-Sysmon/Operational" -MaxEvents 20 |
 
 <figure class="post-figure">
   <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/05_filecreate_confirmed.png' | relative_url }}" alt="Log Operational de Sysmon mostrando entradas de FileCreate Event ID 11 después de ajustar la configuración de Sysmon" width="1264" height="868" loading="lazy" decoding="async">
-  <figcaption>Figura 5: entradas de FileCreate (Event ID 11) en el log de Sysmon — pero solo después de ajustar la configuración. La primera vez que corrió esta consulta, contra la configuración original de SwiftOnSecurity, no volvió nada.</figcaption>
+  <figcaption>Figura 5: entradas de FileCreate (Event ID 11) en el log de Sysmon, pero solo después de ajustar la configuración. La primera vez que corrió esta consulta, contra la configuración original de SwiftOnSecurity, no volvió nada.</figcaption>
 </figure>
 
 Resulta que la configuración de Sysmon de SwiftOnSecurity maneja FileCreate
-como una lista blanca, no como una lista negra. Solo registra el evento para
-un conjunto específico de extensiones que considera peligrosas — cosas como
-`.exe`, `.ps1`, `.dmp` — más un puñado de carpetas como Downloads o Startup.
-Un simple archivo `.txt` en el escritorio no está en esa lista para nada.
+como una allowlist, no como una blocklist. Solo registra el evento para un
+conjunto específico de extensiones que considera peligrosas (`.exe`, `.ps1`,
+`.dmp`), más un puñado de carpetas como Downloads o Startup. Un simple
+archivo `.txt` en el escritorio no está en esa lista para nada.
 
 La lógica detrás de eso no es descabellada. Mantiene bajo el volumen de logs
 asumiendo que un archivo de texto rara vez es la amenaza real. Pero también
-significa que una nota de rescate es invisible para Sysmon por diseño, sin
+significa que una ransom note es invisible para Sysmon por diseño, sin
 importar qué tan bien esté escrita la regla que debería atraparla más
 adelante en la cadena. Ajusté la configuración de Sysmon para cerrar esa
 brecha y volví a correr la prueba, que es lo que realmente muestra la
@@ -421,22 +421,22 @@ python3 scripts/replay_evtx.py --file /home/kali/sysmon_export_ransomware.evtx
 
 <figure class="post-figure">
   <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/09_replay_after_fix.png' | relative_url }}" alt="Salida de terminal de replay_evtx.py mostrando a SYS-004 disparando dos veces y a SYS-080 una vez" width="1276" height="952" loading="lazy" decoding="async">
-  <figcaption>Figura 8: resultado del replay después de la corrección en Sysmon — <code>SYS-004</code> disparó dos veces, <code>SYS-080</code> una vez. Ambas técnicas capturadas.</figcaption>
+  <figcaption>Figura 8: resultado del replay después de la corrección en Sysmon: <code>SYS-004</code> disparó dos veces, <code>SYS-080</code> una vez. Ambas técnicas capturadas.</figcaption>
 </figure>
 
 <figure class="post-figure">
   <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/10_incident_queue.png' | relative_url }}" alt="Consola de sysmon-hunter mostrando dos incidentes en la cola, ambos críticos" width="1265" height="915" loading="lazy" decoding="async">
-  <figcaption>Figura 9: dos incidentes en la cola. "Ransomware preparation on DESKTOP-6VMFSGO" con puntaje 28, CRITICAL, 2 detecciones, mapeado a T1490. Un incidente separado cubrió la nota de rescate. Se mantuvieron separados porque tienen raíces en árboles de procesos distintos — <code>powershell.exe</code> de un lado, <code>cmd.exe</code> generando <code>vssadmin.exe</code> del otro — lo cual tiene sentido ya que eran dos pruebas atómicas no relacionadas corridas con minutos de diferencia.</figcaption>
+  <figcaption>Figura 9: dos incidentes en la cola. "Ransomware preparation on DESKTOP-6VMFSGO" con puntaje 28, CRITICAL, 2 detecciones, mapeado a T1490. Un incidente separado cubrió la ransom note. Se mantuvieron separados porque tienen raíces en árboles de procesos distintos: <code>powershell.exe</code> de un lado, <code>cmd.exe</code> generando <code>vssadmin.exe</code> del otro. Tiene sentido, eran dos pruebas atómicas no relacionadas corridas con minutos de diferencia.</figcaption>
 </figure>
 
 <figure class="post-figure">
-  <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/12_process_tree_destructive.png' | relative_url }}" alt="Vista de árbol de procesos del incidente de la nota de rescate mostrando la línea de comando completa, incluida una referencia a un dominio onion" width="1267" height="919" loading="lazy" decoding="async">
-  <figcaption>Figura 10: árbol de procesos del incidente de la nota de rescate. La línea de comando completa detrás de la nota incluye una referencia de contacto <code>hxxps[://]akira[.]onion</code>. En un ejercicio anterior, ese mismo tipo de texto causó una falsa detección de Tor bajo una versión más antigua de otra regla, <code>SYS-189</code>, que solía coincidir con cualquier línea de comando que contuviera <code>.onion</code> sin importar el contexto. Después de que esa regla se dividiera para que solo dispare con el binario real de Tor o una referencia de red genuina, esta corrida fue la primera vez que un texto similar volvió a aparecer en un replay nuevo. No disparó nada relacionado con Tor — la corrección se mantuvo.</figcaption>
+  <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/12_process_tree_destructive.png' | relative_url }}" alt="Vista de árbol de procesos del incidente de la ransom note mostrando la línea de comando completa, incluida una referencia a un dominio onion" width="1267" height="919" loading="lazy" decoding="async">
+  <figcaption>Figura 10: árbol de procesos del incidente de la ransom note. La línea de comando completa detrás de la nota incluye una referencia de contacto <code>hxxps[://]akira[.]onion</code>. En un ejercicio anterior, ese mismo tipo de texto causó una falsa detección de Tor bajo una versión más antigua de otra regla, <code>SYS-189</code>, que solía coincidir con cualquier línea de comando que contuviera <code>.onion</code> sin importar el contexto. Después de que esa regla se dividiera para que solo dispare con el binario real de Tor o una referencia de red genuina, esta corrida fue la primera vez que un texto similar volvió a aparecer en un replay nuevo. No disparó nada relacionado con Tor. La corrección se mantuvo.</figcaption>
 </figure>
 
 <figure class="post-figure">
   <img src="{{ '/assets/images/writeups/ransomware-note-detection-gap/13_process_tree_shadow.png' | relative_url }}" alt="Vista de árbol de procesos del incidente de shadow copy mostrando a cmd.exe generando vssadmin.exe" width="1262" height="955" loading="lazy" decoding="async">
-  <figcaption>Figura 11: árbol de procesos del incidente de shadow copy — <code>cmd.exe</code> a <code>vssadmin.exe</code>, la misma forma que la detección de shadow copy de un ejercicio anterior, sin verse afectada por nada en esta corrida.</figcaption>
+  <figcaption>Figura 11: árbol de procesos del incidente de shadow copy: <code>cmd.exe</code> a <code>vssadmin.exe</code>, la misma forma que la detección de shadow copy de un ejercicio anterior, sin verse afectada por nada en esta corrida.</figcaption>
 </figure>
 
 ---
@@ -444,12 +444,12 @@ python3 scripts/replay_evtx.py --file /home/kali/sysmon_export_ransomware.evtx
 ## Análisis
 
 Desde afuera, una detección faltante puede parecer un problema de regla
-cuando en realidad es un problema de telemetría. El silencio sobre la nota
-de rescate parecía, a primera vista, algo que `SYS-080` debería haber
-atrapado y no lo hizo. Habría sido fácil ir a reescribir esa regla sin nunca
-verificar si Sysmon había registrado el evento en primer lugar. Revisar el
-log crudo directamente fue lo que realmente encontró el problema real, y la
-regla resultó estar bien todo el tiempo.
+cuando en realidad es un problema de telemetría. El silencio sobre la ransom
+note parecía, a primera vista, algo que `SYS-080` debería haber atrapado y
+no lo hizo. Habría sido fácil ir a reescribir esa regla sin nunca verificar
+si Sysmon había registrado el evento en primer lugar. Revisar el log crudo
+directamente fue lo que realmente encontró el problema real, y la regla
+resultó estar bien todo el tiempo.
 
 La otra mitad de este ejercicio fue más silenciosa pero igual de necesaria.
 Correr la línea de comando exacta con el dominio `.onion` que rompió
@@ -466,8 +466,8 @@ dice que es sólida.
 - Verificar si el sensor registró el evento antes de asumir que una regla
   está rota. Toma un solo comando y puede ahorrarte reescribir una regla que
   nunca fue el problema.
-- El registro basado en listas blancas, como la configuración de FileCreate
-  por defecto de Sysmon, intercambia volumen de logs por puntos ciegos a
+- El registro basado en allowlists, como la configuración de FileCreate por
+  defecto de Sysmon, intercambia volumen de logs por puntos ciegos a
   propósito. Hay que saber cuál se está corriendo antes de confiar en el
   silencio como un resultado limpio.
 - Volver a correr casos de prueba antiguos contra correcciones nuevas cuando
