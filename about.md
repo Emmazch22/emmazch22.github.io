@@ -112,7 +112,7 @@ description: >-
     <div class="cert-carousel reveal" role="region" aria-roledescription="carousel" aria-label="Certifications" tabindex="0">
       <div class="cert-carousel-viewport">
         <ul class="cert-carousel-track">
-          <li class="cert-slide" role="group" aria-roledescription="slide" aria-label="1 of 4">
+          <li class="cert-slide" role="group" aria-roledescription="slide" aria-label="1 of 5">
             <a class="cert-slide-link" href="{{ '/assets/images/certifications/ecthp.jpg' | relative_url }}" target="_blank" rel="noopener">
               <img src="{{ '/assets/images/certifications/ecthp.jpg' | relative_url }}" alt="eCTHP certificate, Certified Threat Hunting Professional, awarded to Emmanuel Zúñiga" width="1980" height="1530" loading="lazy" decoding="async">
             </a>
@@ -121,7 +121,7 @@ description: >-
               <p class="cert-slide-issuer">Certified Threat Hunting Professional &mdash; INE Security</p>
             </div>
           </li>
-          <li class="cert-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+          <li class="cert-slide" role="group" aria-roledescription="slide" aria-label="2 of 5">
             <a class="cert-slide-link" href="{{ '/assets/images/certifications/pmrp.jpg' | relative_url }}" target="_blank" rel="noopener">
               <img src="{{ '/assets/images/certifications/pmrp.jpg' | relative_url }}" alt="PMRP certificate, Practical Malware Researcher Professional, awarded to Emmanuel Zuniga" width="1980" height="1530" loading="lazy" decoding="async">
             </a>
@@ -130,7 +130,7 @@ description: >-
               <p class="cert-slide-issuer">Practical Malware Researcher Professional &mdash; TCM Security</p>
             </div>
           </li>
-          <li class="cert-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+          <li class="cert-slide" role="group" aria-roledescription="slide" aria-label="3 of 5">
             <a class="cert-slide-link" href="{{ '/assets/images/certifications/mcbta.jpg' | relative_url }}" target="_blank" rel="noopener">
               <img src="{{ '/assets/images/certifications/mcbta.jpg' | relative_url }}" alt="MCBTA certificate, Certified Multi-Cloud Blue Team Analyst, awarded to Emmanuel Zuniga" width="700" height="495" loading="lazy" decoding="async">
             </a>
@@ -139,13 +139,22 @@ description: >-
               <p class="cert-slide-issuer">Certified Multi-Cloud Blue Team Analyst &mdash; CyberWarfare Labs</p>
             </div>
           </li>
-          <li class="cert-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+          <li class="cert-slide" role="group" aria-roledescription="slide" aria-label="4 of 5">
             <a class="cert-slide-link" href="{{ '/assets/images/certifications/gcp-ace.jpg' | relative_url }}" target="_blank" rel="noopener">
               <img src="{{ '/assets/images/certifications/gcp-ace.jpg' | relative_url }}" alt="Google Cloud Associate Cloud Engineer certificate awarded to Emmanuel Zúñiga Chaves" width="1980" height="1530" loading="lazy" decoding="async">
             </a>
             <div class="cert-slide-caption">
               <h3 class="cert-slide-title">GCP ACE</h3>
               <p class="cert-slide-issuer">Google Cloud Associate Cloud Engineer</p>
+            </div>
+          </li>
+          <li class="cert-slide" role="group" aria-roledescription="slide" aria-label="5 of 5">
+            <a class="cert-slide-link" href="{{ '/assets/images/certifications/cysa-plus.jpg' | relative_url }}" target="_blank" rel="noopener">
+              <img src="{{ '/assets/images/certifications/cysa-plus.jpg' | relative_url }}" alt="CompTIA CySA+ certificate awarded to Emmanuel Zuniga" width="1024" height="791" loading="lazy" decoding="async">
+            </a>
+            <div class="cert-slide-caption">
+              <h3 class="cert-slide-title">CySA+</h3>
+              <p class="cert-slide-issuer">CompTIA Cybersecurity Analyst</p>
             </div>
           </li>
         </ul>
@@ -157,6 +166,7 @@ description: >-
         <button type="button" class="cert-carousel-dot" role="tab" aria-selected="false" aria-label="Show slide 2: PMRP"></button>
         <button type="button" class="cert-carousel-dot" role="tab" aria-selected="false" aria-label="Show slide 3: MCBTA"></button>
         <button type="button" class="cert-carousel-dot" role="tab" aria-selected="false" aria-label="Show slide 4: GCP ACE"></button>
+        <button type="button" class="cert-carousel-dot" role="tab" aria-selected="false" aria-label="Show slide 5: CySA+"></button>
       </div>
     </div>
   </section>
